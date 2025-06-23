@@ -1,0 +1,19 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "eu sou a eloisa eu sou mt esquisita blablalba"
+authors = [
+    {name = "eloisa", email = "eloisaborgesif@gmail.com"},
+]
+dependencies = ["django>=4.2.23"]
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
