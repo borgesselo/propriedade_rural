@@ -15,14 +15,14 @@ class insumo(models.Model):
     Tipo = models.ForeignKey(TipoInsumo, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.Nome
+        return f'Nome: {self.Nome} | Descrição: {self.Descricao} | Tipo: {self.Tipo}'
 
 class cultura(models.Model):
     Nome = models.CharField(max_length=50)
     Tempo = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.Nome
+        return f'Nome: {self.Nome} | Tempo: {self.Tempo}'
 
 class propriedades(models.Model):
     Nome = models.CharField(max_length=50)
@@ -30,7 +30,7 @@ class propriedades(models.Model):
     Tamanho = models.CharField(max_length=45)
 
     def __str__(self):
-        return f'Nome: {self.Nome} | Localização: {self.Localizacao}'
+        return f'Nome: {self.Nome} | Localização: {self.Localizacao} | Tamanho: {self.Tamanho}'
 
     class Meta:
         verbose_name_plural = "Propriedades"
@@ -44,18 +44,23 @@ class cargo(models.Model):
 class funcionario(models.Model):
     nome = models.CharField(max_length=100)
     cargo = models.ForeignKey(cargo, on_delete=models.PROTECT)
-    data_admissao = models.DateField()
+    dataAdmissao = models.DateField()
     propriedade = models.ForeignKey(propriedades, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.nome
+        return f'Nome: {self.nome} | Cargo: {self.cargo} | Data: {self.dataAdmissao} | Propriedade: {self.propriedade}'
+
+class plantio(models.Model):
+    areaPlantada = models.CharField(max_length=100000)
+    cult = models.ForeignKey(cultura, on_delete=models.PROTECT)
+    prop = models.ForeignKey(propriedades, on_delete=models.PROTECT)
+    data = models.DateField()
+
+    def __str__(self):
+        return f'Área plantada: {self.areaPlantada} - Cultura: {self.cult.nome}'
 
 
-# class plantio(models.Model):
-#     areaPlantada = models.CharField(max_length=100000)
-#     cultura = models.CharField(max_length=10000)
-#     propriedades = models.CharField(max_length=10000)
-#     data = models.CharField(max_length=10)
+
 
 #     def __str__(self):
 #         return self.areaPlantada
