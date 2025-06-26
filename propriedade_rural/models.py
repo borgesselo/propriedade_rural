@@ -59,25 +59,23 @@ class plantio(models.Model):
     def __str__(self):
         return f'Área plantada: {self.areaPlantada} - Cultura: {self.cult.nome}'
 
+class colheita(models.Model):
+    dataColheita = models.DateField()
+    quantidade = models.CharField(max_length=10000)
+    plantio = models.ForeignKey(plantio, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f'Data da colheita: {self.dataColheita} | Quantidade: {self.quantidade} | Plantio: {self.plantio}'
+
+class usoinsumo(models.Model):
+    quantidade = models.CharField(max_length=1000)
+    dataAplicacao = models.DateField()
+    plantio = models.ForeignKey(plantio, on_delete=models.PROTECT)
+    insumo = models.ForeignKey(insumo, on_delete=models.PROTECT)
 
 
+    def __str__(self):
+        return f'Quantidade: {self.quantidade} | Data de aplicação: {self.dataAplicacao} | Plantio: {self.plantio} | Insumo: {self.insumo}'
 
-#     def __str__(self):
-#         return self.areaPlantada
-#         return self.cultura
-#         return self.propriedades
-#         return self.data
-
-
-# class uso_insumo(models.Model):
-#     quantidade = models.CharField(max_length=1000)
-#     dataAplicacao = models.CharField(max_length=10)
-#     plantio = models.CharField(max_length=1000)
-#     insumo = models.CharField(max_length=8)
-
-
-#     def __str__(self):
-#         return self.quantidade
-#         return self.dataAplicacao
-#         return self.plantio
-#         return self.insumo
+        class Meta:
+            verbose_name_plural = "Uso Insumo"
